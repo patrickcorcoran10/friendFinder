@@ -9,7 +9,7 @@ module.exports = function(app) {
 // Routes to GET JSON of all possible friends:
 
 app.get("/api/friends", function(req, res) {
-    return res.json(friends);
+    res.json(friendsData);
 });
 
 // Routes to POST incoming survey results:
@@ -18,7 +18,13 @@ app.post("/api/friends", function(req, res) {
     var newFriend = req.body;
 
     console.log(newFriend);
-    friends.push(newFriend);
+    friendsData.push(newFriend);
     res.json(newFriend);
+});
+
+app.post("/api/clear", function() {
+    friendData = [];
+
+    console.log(friendsData);
 });
 };
