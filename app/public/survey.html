@@ -198,13 +198,17 @@
                 Submit</button>
         </div>
         <!-- Small modal -->
-        <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                                <!-- Match INFO -->
-                        </div>
-                </div>
-        </div>       
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                      <h4>Closest Friend Match</h4>
+                          <div class="divider"></div>
+                          <h5 id="userMatch"></h5>
+                    <img id="userMatchImage" class="materialboxed" width="650" src="">
+            </div>
+            <div class="modal-footer">
+              <a href="/survey" class="modal-action modal-close waves-effect waves-green btn-flat">Fill Again!</a>
+            </div>
+          </div>     
         <footer class="footer">
                         <div class="container">
                           <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/patrickcorcoran10/friendFinder">GitHub Repo</a></p>
@@ -212,6 +216,9 @@
         </footer>
 
     <script type="text/javascript">
+
+        
+	
         
     
         // Capture the form inputs
@@ -256,19 +263,16 @@
               ]
             };
             console.log(userData);
+            $.post("/api/friends", userData);
+            
     
-            // AJAX post the data to the friends API.
-            $.post("/api/friends", userData, function(data) {
-                
-    
-              // Grab the result from the AJAX post so that the best match's name and photo are displayed.
-              $("#match-name").text(data.name);
-              $("#match-img").attr("src", data.photo);
-    
-              // Show the modal with the best match
-              $("#results-modal").modal("toggle");
-    
-            });
+            // Here's some code to print the correct name to the page. 
+            function findFriend() {
+              var currentURL = window.location.origin;
+
+              $.ajax({ url: currentURL + "/api/"})
+            }
+            
           } else {
             alert("Individuals of such mystery can NOT be matched. Sorry.");
           }
